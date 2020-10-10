@@ -1,0 +1,26 @@
+<mat-toolbar fxLayout="row" color="primary">
+    <span class="logo shadow-box" fxFlex>
+        <a [routerLink]="'/'"> <img src="../../../assets/images/logo.png" /></a>
+    </span>
+    
+    
+    <div class="left-container" fxFlex>
+        <button [class.active]="item.route === '/mobile'" class="" mat-button *ngFor="let item of navItems" fxHide.xs>
+            <a class="link-action" mat-button [routerLink]="item.route"><mat-icon aria-hidden="false">{{item.icon}}</mat-icon> {{item.title}} </a>
+        </button>
+        <mat-menu #dropMenu="matMenu">
+            <ng-container *ngFor="let item of navItems">
+                <button mat-menu-item>                
+                    <a class="link-action" mat-button [routerLink]="'/' + item.route"> {{item.title}} </a>                                        
+                </button>
+                <mat-divider></mat-divider>
+            </ng-container>
+        </mat-menu>
+    </div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <button mat-icon-button [matMenuTriggerFor]="dropMenu" fxHide fxShow.xs>
+        <mat-icon>more_vert</mat-icon>
+    </button>
+</mat-toolbar>

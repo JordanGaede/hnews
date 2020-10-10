@@ -1,0 +1,12 @@
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyBNedymm8RwLHNSic29LblQWnIXqC_W2vk",
+    authDomain: "hackernews-cd6a4.firebaseapp.com",
+    databaseURL: "https://hackernews-cd6a4.firebaseio.com",
+    projectId: "hackernews-cd6a4",
+    storageBucket: "hackernews-cd6a4.appspot.com",
+    messagingSenderId: "347718634927",
+    appId: "1:347718634927:web:ae7322092ef99c4523b35a"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);

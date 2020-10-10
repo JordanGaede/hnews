@@ -1,0 +1,33 @@
+<div
+    id="list-component"
+    infiniteScroll
+    [infiniteScrollDistance]="2"
+    [infiniteScrollThrottle]="50"
+    (scrolled)="onScroll()"
+    [ngStyle]="{'margin-top':'1rem'}" fxLayout="row wrap" fxLayoutGap="1rem" fxLayoutAlign="flex-start">
+    <ng-container *ngFor="let item of newStoryItems.data">
+        <mat-card class="article-card mx-1 shadow-box my-1">
+            <mat-card-header>
+                <div class="text-center" mat-card-avatar (click)="onUpvote(item.id)">
+                    <mat-icon class="upvote-icon">keyboard_arrow_up</mat-icon>
+                    <div>{{item.score}}</div>
+                </div>
+                <mat-card-title>
+                    <span routerLink="../{{item.id}}/comments" mat-button color="accent" *ngIf="item.url; else elseTitleLink">
+                        <a href="{{item.url}}" target="_blank">{{item.title}} {{'comment' | translate}}</a>
+                        <mat-card-subtitle class="host-path d-inline"><a href="{{item.url}}" target="_blank">({{item.displayUrl}})</a></mat-card-subtitle>
+                    </span>                    
+                    <ng-template #elseTitleLink i18n><span>{{item.title}}</span></ng-template>
+                </mat-card-title>
+            <mat-card-subtitle>{{'by' | translate}} {{item.by}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-actions>
+                <span *ngIf="item.descendants">
+                    <button routerLink="./{{item.id}}/comments" mat-button color="accent" *ngIf="item.descendants === 1; else elseCommentBlock">{{item.descendants}} {{'comment' | translate}}</button>
+                    <ng-template #elseCommentBlock i18n><button routerLink="./{{item.id}}/comments" mat-button color="accent">{{item.descendants}} {{'comments' | translate}}</button></ng-template>
+                </span>
+                <button routerLink="./{{item.id}}/comments" mat-button color="accent">{{ (item.time | amFromUnix) | amTimeAgo}}</button>
+            </mat-card-actions>
+        </mat-card>
+    </ng-container>
+</div>

@@ -1,0 +1,20 @@
+<div *ngIf="!comment.deleted">
+    <div class="meta" [class.meta-collapse]="collapse">
+        <span class="collapse" (click)="collapse = !collapse">[{{collapse ? '+' : '-'}}]</span>
+        <a [routerLink]="['/user', comment.user]" routerLinkActive="active">{{comment.user}}</a>
+        <span class="time">{{comment.time_ago}}</span>
+    </div>
+    <div class="comment-tree mx-1 shadow-box">
+        <div [hidden]="collapse">
+            <p class="comment-text" [innerHTML]="comment.text"></p>
+            <ul class="subtree">
+                <li *ngFor="let subComment of comment.children">
+                    <app-comment [comment]="subComment"></app-comment>
+                    <div *ngIf="subComment.kids && subComment.kids.length > 0">
+                        <button (click)="loadAdditionalComments(subComment.id)" mat-button color="accent">{{ 'loadAdditional' | translate}}</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
